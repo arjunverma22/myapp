@@ -1,6 +1,6 @@
 # app.py
-def main():
-    print("Welcome to MyApp v1.1 - Development version")
+def login():
+    print("Login feature coming soon!")
 
-if __name__ == "__main__":
-    main()
+print("Welcome to MyApp v1.2 - Release Candidate")
+login()

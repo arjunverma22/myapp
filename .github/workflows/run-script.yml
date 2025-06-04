@@ -1,0 +1,28 @@
+name: Run Script on Different Triggers
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # Runs daily at 10:00 UTC
+  workflow_dispatch:      # Manual trigger
+  pull_request:
+    types: [opened]       # On PR creation
+  pull_request_target:
+    types: [closed]       # On PR merge
+
+jobs:
+  run-script:
+    if: github.event.pull_request.merged == true || github.event_name != 'pull_request_target'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run app.py
+        run: python app.py
+
